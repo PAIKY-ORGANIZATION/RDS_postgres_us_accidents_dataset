@@ -1,0 +1,37 @@
+name: AWS git fetch
+on:
+  push:
+    branches: ['master']
+
+jobs:
+  run_in_EC2:
+    runs-on: ubuntu-latest
+    #environment: Test_Paiky_Environment #$ Optionally, create  a github environment to avoid duplicating secrets across repositories.
+    steps:
+      # - name: ENV TEST
+      #   run: echo "$REPO_PATH" && echo "$REPO_NAME"
+
+
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{vars.EC2_HOST_PAID_INSTANCE}}
+          username: ${{secrets.EC2_USER}}
+          key: ${{secrets.EC2_SSH_PRIVATE_KEY}}
+          passphrase: ${{ secrets.EC2_SSH_PRIVATE_KEY_PASSPHRASE }} #$ Only if required.
+
+          script: |
+            UNIQUE_APP_NAME="${{ vars.UNIQUE_APP_NAME }}"  #! UNIQUE_APP_NAME must be all lowercase and without underscores for Docker to accept it.
+            #! UNIQUE_APP_NAME must be set per-repository
+            #! If you are using Docker COMPOSE,  you don't need a unique app name for the image name. However, you still need a unique directory name.
+            REPO_PATH="${{ github.repository }}"  #$ Example: # gives "dev-miguel/repo-name". We will use this to clone the repo initially. 
+
+            cd ~/vsCodeMain
+            #* If the is no desired-folder with .git, it means the repo doesn't exist so we clone it INTO A DESIRED FOLDER NAME.
+            [ -d "$UNIQUE_APP_NAME/.git" ] || git clone git@github.com:$REPO_PATH.git "$UNIQUE_APP_NAME" #! AWS needs  need to use an SSH key of your github account that DOESN'T USE A PASSPHRASE in order to clone.
+
+            cd "$UNIQUE_APP_NAME"
+            git fetch 
+            git merge origin/master
+
+            

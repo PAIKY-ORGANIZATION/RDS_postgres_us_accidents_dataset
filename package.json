@@ -6,8 +6,7 @@
     "scripts": {
         "build": "tsc",
         "test": "ENVIRONMENT=test vitest",
-        "dev_local": "ENVIRONMENT=local npx nodemon",
-        "dev_docker": "ENVIRONMENT=docker npx nodemon"
+        "dev": "npx nodemon"
     },
     "keywords": [],
     "author": "",
