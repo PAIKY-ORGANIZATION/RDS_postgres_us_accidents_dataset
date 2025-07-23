@@ -3,7 +3,7 @@ import './bootstrap.js' // This  needs to be imported at the top in order for en
 import express, { RequestHandler} from 'express';
 import { router as accidentsRouter } from './routes/accidents-router.js';
 import { router as loggerRouter } from './routes/logger-router.js';
-import {reqLogger} from 'req-logger-express'
+import reqLogger from 'req-logger-express'
 import {errorMiddleware} from 'custom-exceptions-express'
 
 
@@ -12,7 +12,7 @@ app.use(express.json());
 
 
 //Custom middleware
-app.use(reqLogger as RequestHandler)
+app.use(reqLogger('RDS_db_project'))
 //Routes
 app.use('/api',  accidentsRouter);
 app.use('/api',  loggerRouter);

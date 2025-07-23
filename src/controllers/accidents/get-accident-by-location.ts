@@ -7,11 +7,8 @@ export const getAccidentByLocation = async(req: Request<{}, {}, GetAccidentByLoc
     const  {body} = req
 
 
-
-
-    //? LEAVE  EXPLANATION
     const first100matchesByLocation = await prisma.us_accidents_filtered.findMany({
-        where: body,
+        where: body, //* "body" will be an object with OPTIONAL properties like {county, street, city, state}
         take: 100,
     })
 
