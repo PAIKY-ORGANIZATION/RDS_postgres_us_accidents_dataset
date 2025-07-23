@@ -6,5 +6,3 @@ services:
     command: sh -c "npx prisma generate  && npm run dev"
     volumes:
       - "./src:/app/src" #! Not readonly.   Avoid it if you plan on using prisma which generates the client in the src folder. 
-    env_file: 
-      
