@@ -11,6 +11,6 @@ import { getAccidentByLocationSchema } from "../zodSchemas/accidents-schema.js";
 export const router = Router();
 
 
-// router.get('/accidents/:index', validate(getAccidentByIndex) )
+router.get('/accidents/index/:index', validate(getAccidentByIndex) )
 
 router.get('/accidents/get-by-location', validate(getAccidentByLocation, getAccidentByLocationSchema))
