@@ -36,4 +36,4 @@ jobs:
             git merge origin/master
 
             sudo docker compose down
-            sudo docker compose up --build 
+            sudo docker compose up --build -d
