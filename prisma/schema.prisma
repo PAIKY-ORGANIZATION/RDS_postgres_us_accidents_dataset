@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model us_accidents_filtered {
+  index         Int       @id
+  severity      Int?
+  start_time    DateTime? @db.Timestamp(6)
+  description   String?
+  city          String?
+  street        String?
+  county        String?
+  state         String?
+  temperature_f Float?    @db.Real
+}
