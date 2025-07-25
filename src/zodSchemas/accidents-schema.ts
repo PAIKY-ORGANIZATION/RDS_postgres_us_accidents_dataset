@@ -11,3 +11,4 @@ export const getAccidentByLocationSchema = z.object({
 })
 
 export type GetAccidentByLocationSchemaType = z.infer<typeof getAccidentByLocationSchema>['body']
+
