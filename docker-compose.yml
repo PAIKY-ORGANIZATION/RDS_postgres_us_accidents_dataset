@@ -3,6 +3,6 @@ services:
     build: .
     ports:
       - "3008:3001"
-    command: sh -c "npx prisma generate  && npm run dev"
+    command: sh -c "npx prisma db pull && npx prisma generate  && npm run dev"
     volumes:
       - "./src:/app/src" #! Not readonly.   Avoid it if you plan on using prisma which generates the client in the src folder. 
