@@ -9,7 +9,6 @@ datasource db {
 }
 
 model us_accidents_filtered {
-  index         Int       @id
   severity      Int?
   start_time    DateTime? @db.Timestamp(6)
   description   String?
@@ -18,4 +17,5 @@ model us_accidents_filtered {
   county        String?
   state         String?
   temperature_f Float?    @db.Real
+  index         Int       @id
 }
