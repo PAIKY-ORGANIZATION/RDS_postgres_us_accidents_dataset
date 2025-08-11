@@ -11,6 +11,7 @@ export const getAccidentByIndex = async(req: Request<{index: string}>, res: Resp
 		throw new BadRequest('Id is required')
 	}
 	
+	
 	const indexNumber = Number(index)
 
 	//* Get the highest index
