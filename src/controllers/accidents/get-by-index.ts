@@ -5,6 +5,11 @@ import { BadRequest } from 'custom-exceptions-express';
 export const getAccidentByIndex = async(req: Request<{index: string}>, res: Response)=>{
 	const {index} = req.params;
 
+	const info = await prisma.$queryRawUnsafe(`
+	SELECT current_database() AS database, current_schema() AS schema
+	`);
+	console.log(info);
+
 
 	//*  Simple validation without Zod
 	if(!index || index === '' || typeof index !== 'string'){
