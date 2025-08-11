@@ -34,6 +34,8 @@ jobs:
             git fetch 
             git merge origin/master
 
+
+            rm ./prisma/.env #! Remove for safety.
             echo "DATABASE_URL=${{secrets.DATABASE_URL}}" >> ./prisma/.env #* this will contain the full TCP/IP URL for Prisma to connect to the RDS database.
 
             sudo docker compose down
