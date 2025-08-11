@@ -5,8 +5,6 @@ import { BadRequest } from 'custom-exceptions-express';
 export const getAccidentByIndex = async(req: Request<{index: string}>, res: Response)=>{
 	const {index} = req.params;
 
-	
-
 
 	//*  Simple validation without Zod
 	if(!index || index === '' || typeof index !== 'string'){
